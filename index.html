@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>99Signals — Сигналы для Pocket Option</title>
+  <style>
+    body {
+      background: #1e0033;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #111;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      color: #fff;
+      margin: 0;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .signal-btn {
+      width: 200px;
+      height: 60px;
+      margin: 10px;
+      font-size: 1.5rem;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .signal-btn.up {
+      background-color: green;
+      color: white;
+    }
+
+    .signal-btn.down {
+      background-color: red;
+      color: white;
+    }
+
+    .signal-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .signal-time {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      text-align: center;
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    .footer a {
+      color: #ccc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .footer a:hover {
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>99Signals</h1>
+  </header>
+
+  <div class="container">
+    <button id="signal-up" class="signal-btn up">Узнать сигнал (вверх)</button>
+    <button id="signal-down" class="signal-btn down">Узнать сигнал (вниз)</button>
+
+    <div class="signal-time" id="signal-time">Время: 00:00</div>
+  </div>
+
+  <div class="footer">
+    <p>Перейти на <a href="https://po-ru4.click/register?utm_campaign=800108&utm_source=affiliate&utm_medium=sr&a=ggW42vEfkMFsp6&ac=99&code=50START" target="_blank">PocketOption</a></p>
+    <p><a href="https://t.me/m99manager" target="_blank">Связь с менеджером</a></p>
+  </div>
+
+  <script>
+    // Функция для получения случайного сигнала (вверх/вниз) с логикой
+    function getRandomSignal() {
+      const signals = ["up", "down", "up", "down", "down", "up", "down", "up", "up", "down", "down", "up", "down", "up"];
+      const randomSignal = signals[Math.floor(Math.random() * signals.length)];
+      return randomSignal;
+    }
+
+    // Функция для отображения сигнала
+    function displaySignal() {
+      const signal = getRandomSignal();
+      const signalTime = document.getElementById("signal-time");
+      const signalBtnUp = document.getElementById("signal-up");
+      const signalBtnDown = document.getElementById("signal-down");
+
+      if (signal === "up") {
+        signalBtnUp.classList.add("up");
+        signalBtnDown.classList.remove("down");
+        signalTime.textContent = `Сигнал: Вверх на 1 минуту, время: ${new Date().toLocaleTimeString()}`;
+      } else if (signal === "down") {
+        signalBtnUp.classList.remove("up");
+        signalBtnDown.classList.add("down");
+        signalTime.textContent = `Сигнал: Вниз на 1 минуту, время: ${new Date().toLocaleTimeString()}`;
+      }
+      
+      // Таймер для изменения сигнала через 1 минуту
+      setTimeout(() => {
+        signalBtnUp.classList.remove("up");
+        signalBtnDown.classList.remove("down");
+        signalTime.textContent = "Время вышло";
+      }, 60000); // Через 1 минуту
+    }
+
+    // Добавление обработчика для кнопки "Узнать сигнал (вверх)"
+    document.getElementById("signal-up").addEventListener("click", displaySignal);
+    
+    // Добавление обработчика для кнопки "Узнать сигнал (вниз)"
+    document.getElementById("signal-down").addEventListener("click", displaySignal);
+  </script>
+
+</body>
+</html>
